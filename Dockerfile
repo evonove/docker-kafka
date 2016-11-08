@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 # download kafka and unpack it into /opt
 # the first line parse the json and returns the preferred apache mirror
-RUN export APACHE_MIRROR=$(curl -s 'https://www.apache.org/dyn/closer.cgi?as_json=1' | jq --raw-output '.preferred') \
+RUN APACHE_MIRROR=$(curl -s 'https://www.apache.org/dyn/closer.cgi?as_json=1' | jq --raw-output '.preferred') \
     && curl -SL ${APACHE_MIRROR}${KAFKA_PATH} | tar -zxC /opt/ \
     && mv /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME}
 
