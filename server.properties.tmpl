@@ -18,7 +18,7 @@
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
-broker.id=-1
+broker.id={{KAFKA_BROKER_ID}}
 
 # Switch to enable topic deletion or not, default value is false
 #delete.topic.enable=true
@@ -28,15 +28,18 @@ broker.id=-1
 # The address the socket server listens on. It will get the value returned from
 # java.net.InetAddress.getCanonicalHostName() if not configured.
 #   FORMAT:
-#     listeners = security_protocol://host_name:port
+#     listeners = listener_name://host_name:port
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
-#listeners=PLAINTEXT://:9092
+##listeners=PLAINTEXT://:9092
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
-advertised.listeners={{KAFKA_ADVERTISED_LISTENERS}}
+##advertised.listeners={{KAFKA_ADVERTISED_LISTENERS}}
+
+# Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
+#listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 
 # The number of threads handling network requests
 num.network.threads=3
@@ -57,7 +60,7 @@ socket.request.max.bytes=104857600
 ############################# Log Basics #############################
 
 # A comma seperated list of directories under which to store log files
-log.dirs=/tmp/kafka-logs
+log.dirs=/opt/kafka/data
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
@@ -92,11 +95,11 @@ num.recovery.threads.per.data.dir=1
 # A segment will be deleted whenever *either* of these criteria are met. Deletion always happens
 # from the end of the log.
 
-# The minimum age of a log file to be eligible for deletion
+# The minimum age of a log file to be eligible for deletion due to age
 log.retention.hours=168
 
 # A size-based retention policy for logs. Segments are pruned from the log as long as the remaining
-# segments don't drop below log.retention.bytes.
+# segments don't drop below log.retention.bytes. Functions independently of log.retention.hours.
 #log.retention.bytes=1073741824
 
 # The maximum size of a log segment file. When this size is reached a new log segment will be created.
