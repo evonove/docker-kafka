@@ -3,7 +3,7 @@
 
 IP=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $1}')
 DEFAULT_ADVERTISED_LISTENER=PLAINTEXT://$IP:9092
-KAFKA_BROKER_ID=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $1} | cut -d "-" -f2')
+KAFKA_BROKER_ID=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $3}' | cut -d "-" -f2)
 
 cat /opt/kafka/config/server.properties.tmpl | sed \
   -e "s|{{KAFKA_BROKER_ID}}|${KAFKA_BROKER_ID:--1}|g" \
