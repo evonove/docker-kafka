@@ -53,6 +53,14 @@ socket.receive.buffer.bytes=102400
 # The maximum size of a request that the socket server will accept (protection against OOM)
 socket.request.max.bytes=104857600
 
+# The maximum size of message that the server can receive
+message.max.bytes={{KAFKA_MESSAGE_MAX_BYTES}}
+
+# The maximum size of a request in bytes
+max.request.size={{KAFKA_MAX_REQUEST_SIZE}}
+
+# The maximum amount of data per-partition the server will return
+max.partition.fetch.bytes={{KAFKA_MAX_PARTITION_FETCH_BYTES}}
 
 ############################# Log Basics #############################
 
@@ -117,5 +125,3 @@ zookeeper.connect={{ZOOKEEPER_CONNECT}}
 
 # Timeout in ms for connecting to zookeeper
 zookeeper.connection.timeout.ms={{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}
-
-
